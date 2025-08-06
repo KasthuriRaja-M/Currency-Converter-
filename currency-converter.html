@@ -296,6 +296,7 @@
         .flag-jpy { background: #FFFFFF; border: 1px solid #CCCCCC; }
         .flag-cad { background: linear-gradient(to right, #FF0000 0%, #FFFFFF 50%, #FF0000 100%); }
         .flag-aud { background: linear-gradient(to right, #012169 0%, #FFFFFF 33%, #C8102E 66%); }
+        .flag-inr { background: linear-gradient(to bottom, #FF9933 0%, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); }
 
         /* Success animation */
         .success-animation {
@@ -370,6 +371,7 @@
                         <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
                         <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
                         <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                        <option value="INR">🇮🇳 INR - Indian Rupee</option>
                     </select>
                 </div>
 
@@ -384,6 +386,7 @@
                         <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
                         <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
                         <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                        <option value="INR">🇮🇳 INR - Indian Rupee</option>
                     </select>
                 </div>
             </div>
@@ -399,12 +402,13 @@
     <script>
         // Sample exchange rates
         const rates = {
-            USD: { EUR: 0.85, GBP: 0.73, JPY: 110.0, CAD: 1.25, AUD: 1.35 },
-            EUR: { USD: 1.18, GBP: 0.86, JPY: 129.4, CAD: 1.47, AUD: 1.59 },
-            GBP: { USD: 1.37, EUR: 1.16, JPY: 150.7, CAD: 1.71, AUD: 1.85 },
-            JPY: { USD: 0.009, EUR: 0.0077, GBP: 0.0066, CAD: 0.011, AUD: 0.012 },
-            CAD: { USD: 0.80, EUR: 0.68, GBP: 0.58, JPY: 88.0, AUD: 1.08 },
-            AUD: { USD: 0.74, EUR: 0.63, GBP: 0.54, JPY: 81.5, CAD: 0.93 }
+            USD: { EUR: 0.85, GBP: 0.73, JPY: 110.0, CAD: 1.25, AUD: 1.35, INR: 83.0 },
+            EUR: { USD: 1.18, GBP: 0.86, JPY: 129.4, CAD: 1.47, AUD: 1.59, INR: 97.5 },
+            GBP: { USD: 1.37, EUR: 1.16, JPY: 150.7, CAD: 1.71, AUD: 1.85, INR: 113.5 },
+            JPY: { USD: 0.009, EUR: 0.0077, GBP: 0.0066, CAD: 0.011, AUD: 0.012, INR: 0.75 },
+            CAD: { USD: 0.80, EUR: 0.68, GBP: 0.58, JPY: 88.0, AUD: 1.08, INR: 66.4 },
+            AUD: { USD: 0.74, EUR: 0.63, GBP: 0.54, JPY: 81.5, CAD: 0.93, INR: 61.5 },
+            INR: { USD: 0.012, EUR: 0.010, GBP: 0.0088, JPY: 1.33, CAD: 0.015, AUD: 0.016 }
         };
 
         function convertCurrency() {
