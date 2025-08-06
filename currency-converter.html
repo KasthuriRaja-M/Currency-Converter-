@@ -22,6 +22,28 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background particles */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
         .App {
@@ -29,14 +51,48 @@
             width: 100%;
             max-width: 500px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .converter-container {
-            background: white;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            animation: slideIn 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .converter-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         h1 {
@@ -44,11 +100,22 @@
             margin-bottom: 30px;
             font-size: 2.5rem;
             font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.3)); }
+            to { filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.6)); }
         }
 
         .input-group {
             margin-bottom: 30px;
             text-align: left;
+            position: relative;
         }
 
         .input-group label {
@@ -63,16 +130,19 @@
             width: 100%;
             padding: 15px;
             border: 2px solid #e1e5e9;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 1.1rem;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
             background: #f8f9fa;
+            position: relative;
         }
 
         .input-group input:focus {
             outline: none;
             border-color: #667eea;
             background: white;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
         }
 
         .currency-selectors {
@@ -85,6 +155,7 @@
         .currency-selector {
             flex: 1;
             text-align: left;
+            position: relative;
         }
 
         .currency-selector label {
@@ -99,17 +170,25 @@
             width: 100%;
             padding: 15px;
             border: 2px solid #e1e5e9;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 1.1rem;
             background: #f8f9fa;
             cursor: pointer;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 40px;
         }
 
         .currency-selector select:focus {
             outline: none;
             border-color: #667eea;
-            background: white;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
         }
 
         .swap-btn {
@@ -117,27 +196,56 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
+            width: 60px;
+            height: 60px;
+            font-size: 1.8rem;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .swap-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
         }
 
         .swap-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            transform: scale(1.1) rotate(180deg);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .swap-btn:hover::before {
+            left: 100%;
+        }
+
+        .swap-btn:active {
+            transform: scale(0.95);
         }
 
         .result {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 25px;
             margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            animation: resultPulse 0.5s ease-out;
+        }
+
+        @keyframes resultPulse {
+            0% { transform: scale(0.95); }
+            100% { transform: scale(1); }
         }
 
         .result h2 {
@@ -151,14 +259,56 @@
             font-weight: 700;
             color: #667eea;
             margin-bottom: 10px;
+            animation: numberCount 0.8s ease-out;
+        }
+
+        @keyframes numberCount {
+            from { 
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .rate-info {
             color: #666;
             font-size: 1rem;
             font-style: italic;
+            opacity: 0.8;
         }
 
+        /* Currency flags and icons */
+        .currency-flag {
+            display: inline-block;
+            width: 20px;
+            height: 15px;
+            margin-right: 8px;
+            border-radius: 2px;
+            vertical-align: middle;
+        }
+
+        .flag-usd { background: linear-gradient(to right, #B22234 0%, #B22234 33%, #FFFFFF 33%, #FFFFFF 66%, #3C3B6E 66%); }
+        .flag-eur { background: linear-gradient(to right, #003399 0%, #FFCC00 50%, #FF0000 100%); }
+        .flag-gbp { background: linear-gradient(to right, #012169 0%, #FFFFFF 33%, #C8102E 66%); }
+        .flag-jpy { background: #FFFFFF; border: 1px solid #CCCCCC; }
+        .flag-cad { background: linear-gradient(to right, #FF0000 0%, #FFFFFF 50%, #FF0000 100%); }
+        .flag-aud { background: linear-gradient(to right, #012169 0%, #FFFFFF 33%, #C8102E 66%); }
+
+        /* Success animation */
+        .success-animation {
+            animation: successBounce 0.6s ease-out;
+        }
+
+        @keyframes successBounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Responsive design */
         @media (max-width: 600px) {
             .converter-container {
                 margin: 20px;
@@ -182,48 +332,64 @@
                 font-size: 1.5rem;
             }
         }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
     <div class="App">
         <div class="converter-container">
-            <h1>Currency Converter</h1>
+            <h1>💱 Currency Converter</h1>
             
             <div class="input-group">
-                <label>Amount:</label>
+                <label>💰 Amount:</label>
                 <input type="number" id="amount" value="1" placeholder="Enter amount" min="0" step="0.01">
             </div>
 
             <div class="currency-selectors">
                 <div class="currency-selector">
-                    <label>From:</label>
+                    <label>📤 From:</label>
                     <select id="fromCurrency">
-                        <option value="USD">USD</option>
-                        <option value="EUR">EUR</option>
-                        <option value="GBP">GBP</option>
-                        <option value="JPY">JPY</option>
-                        <option value="CAD">CAD</option>
-                        <option value="AUD">AUD</option>
+                        <option value="USD">🇺🇸 USD - US Dollar</option>
+                        <option value="EUR">🇪🇺 EUR - Euro</option>
+                        <option value="GBP">🇬🇧 GBP - British Pound</option>
+                        <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+                        <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                        <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
                     </select>
                 </div>
 
-                <button class="swap-btn" onclick="swapCurrencies()">⇄</button>
+                <button class="swap-btn" onclick="swapCurrencies()" title="Swap Currencies">⇄</button>
 
                 <div class="currency-selector">
-                    <label>To:</label>
+                    <label>📥 To:</label>
                     <select id="toCurrency">
-                        <option value="EUR">EUR</option>
-                        <option value="USD">USD</option>
-                        <option value="GBP">GBP</option>
-                        <option value="JPY">JPY</option>
-                        <option value="CAD">CAD</option>
-                        <option value="AUD">AUD</option>
+                        <option value="EUR">🇪🇺 EUR - Euro</option>
+                        <option value="USD">🇺🇸 USD - US Dollar</option>
+                        <option value="GBP">🇬🇧 GBP - British Pound</option>
+                        <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+                        <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                        <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
                     </select>
                 </div>
             </div>
 
-            <div class="result">
-                <h2>Result:</h2>
+            <div class="result" id="resultContainer">
+                <h2>🎯 Result:</h2>
                 <div class="converted-amount" id="result">1 USD = 0.85 EUR</div>
                 <div class="rate-info" id="rateInfo">1 USD = 0.85 EUR</div>
             </div>
@@ -257,6 +423,10 @@
                 convertedAmount = amount * rate;
             }
 
+            // Add success animation
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.classList.add('success-animation');
+            
             document.getElementById('result').textContent = 
                 `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
             
@@ -267,6 +437,11 @@
             } else {
                 document.getElementById('rateInfo').style.display = 'none';
             }
+
+            // Remove animation class after animation completes
+            setTimeout(() => {
+                resultContainer.classList.remove('success-animation');
+            }, 600);
         }
 
         function swapCurrencies() {
@@ -275,16 +450,63 @@
             const temp = fromSelect.value;
             fromSelect.value = toSelect.value;
             toSelect.value = temp;
+            
+            // Add rotation animation to swap button
+            const swapBtn = document.querySelector('.swap-btn');
+            swapBtn.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                swapBtn.style.transform = '';
+            }, 300);
+            
             convertCurrency();
         }
 
-        // Add event listeners
-        document.getElementById('amount').addEventListener('input', convertCurrency);
+        // Add event listeners with debouncing for better performance
+        let timeout;
+        function debounce(func, wait) {
+            clearTimeout(timeout);
+            timeout = setTimeout(func, wait);
+        }
+
+        document.getElementById('amount').addEventListener('input', () => {
+            debounce(convertCurrency, 100);
+        });
+        
         document.getElementById('fromCurrency').addEventListener('change', convertCurrency);
         document.getElementById('toCurrency').addEventListener('change', convertCurrency);
 
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('amount').focus();
+            }
+            if (e.key === ' ') {
+                e.preventDefault();
+                swapCurrencies();
+            }
+        });
+
         // Initial conversion
         convertCurrency();
+
+        // Add some fun effects
+        setInterval(() => {
+            const particles = document.createElement('div');
+            particles.style.position = 'fixed';
+            particles.style.left = Math.random() * window.innerWidth + 'px';
+            particles.style.top = window.innerHeight + 'px';
+            particles.style.width = '4px';
+            particles.style.height = '4px';
+            particles.style.background = 'rgba(255,255,255,0.6)';
+            particles.style.borderRadius = '50%';
+            particles.style.pointerEvents = 'none';
+            particles.style.animation = 'float 3s linear';
+            document.body.appendChild(particles);
+            
+            setTimeout(() => {
+                particles.remove();
+            }, 3000);
+        }, 2000);
     </script>
 </body>
 </html> 
